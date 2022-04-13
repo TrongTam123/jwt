@@ -1,4 +1,5 @@
 import express from "express"
+import homeController from '../controllers/homeController'
 
 const router = express.Router()
 
@@ -8,9 +9,8 @@ const router = express.Router()
  */
 
 const initWebRoutes = (app) => {
-    router.get("/", (req, res) => {
-        return res.send("Hello World")
-    })
+    router.get("/", homeController.handleHelloWorld)
+    router.get("/user", homeController.handerUserPage)
 
     return app.use("/", router)
 }
