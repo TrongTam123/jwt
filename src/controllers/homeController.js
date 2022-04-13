@@ -4,8 +4,13 @@ const handleHelloWorld = (req, res) => {
     return res.render("home.ejs")
 }
 
-const handerUserPage = (req, res) => {
-    return res.render("user.ejs")
+const handerUserPage = async (req, res) => {
+
+    let userList = await userService.getUserList()
+
+    return res.render("user.ejs", {
+        userList
+    })
 }
 
 const handleCreateUser = (req, res) => {
@@ -20,7 +25,6 @@ const handleCreateUser = (req, res) => {
     // console.log("checl pwd", checkPwd);
 
     // userService.createNewUser(email, password, username)
-    userService.getUserList()
     
     return res.send("handleCreateUser");
 }
