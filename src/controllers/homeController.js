@@ -7,9 +7,8 @@ const handleHelloWorld = (req, res) => {
 const handerUserPage = async (req, res) => {
 
     let userList = await userService.getUserList()
-
     return res.render("user.ejs", {
-        userList
+        userList,
     })
 }
 
@@ -24,13 +23,18 @@ const handleCreateUser = (req, res) => {
     // let checkPwd = bcrypt.compareSync(password, hashPassWord); // true
     // console.log("checl pwd", checkPwd);
 
-    // userService.createNewUser(email, password, username)
-    
-    return res.send("handleCreateUser");
+    userService.createNewUser(email, password, username)
+    return res.redirect("/user");
+}
+
+const handleDeleteUser = async (req, res) => {
+    await userService.deleteUser(req.params.id)
+    return res.redirect("/user");
 }
 
 module.exports = {
     handleHelloWorld,
     handerUserPage,
-    handleCreateUser
+    handleCreateUser,
+    handleDeleteUser
 }
