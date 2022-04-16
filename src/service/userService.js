@@ -28,6 +28,46 @@ const createNewUser = async (email, password, username) => {
 
 const getUserList = async () => {
 
+    // RelationsShip
+
+    let newUser = await db.User.findOne({
+        where: {
+            id: 1
+        },
+        attributes: ["id", "username", "email"],
+        include: 
+        {
+             model: db.Group,
+             attributes: ["name", "description"],
+        },
+        raw: true,
+        nest: true
+    })
+    console.log("Check user", newUser);
+
+    // let rows = await db.Group.findOne({
+    //     where: {
+    //         id: 1
+    //     },
+    //     include: { model: db.Role},
+    //     raw: true,
+    //     nest: true
+    // })
+    // console.log("Check rows", rows);
+
+    let r = await db.Role.findAll({
+        include: {
+            model: db.Group,
+            where: {
+                id: 1
+            }
+        },
+        raw: true,
+        nest: true
+    })
+
+    console.log("Check rows", r);
+
     let users = []
 
     users = await db.User.findAll()
