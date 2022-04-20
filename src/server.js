@@ -10,6 +10,16 @@ import configCors from "./config/cors"
 const app = express()
 const PORT = process.env.PORT || 6060;
 
+//Static files
+app.use(express.static('public'))
+app.use('css', express.static(__dirname + 'public/css'))
+app.use('js', express.static(__dirname + 'public/js'))
+app.use('img', express.static(__dirname + 'public/img'))
+app.use('svg', express.static(__dirname + 'public/svg'))
+app.use('eot', express.static(__dirname + 'public/eot'))
+app.use('scss', express.static(__dirname + 'public/scss'))
+app.use('less', express.static(__dirname + 'public/less'))
+
 //Config Cors
 configCors(app)
 //config body parser
