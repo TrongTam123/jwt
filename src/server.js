@@ -23,10 +23,6 @@ configViewEngine(app)
 // connection
 connection()
 
-// test jwt
-CreateJWT()
-let decodedData = verifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGFtbSIsImFkZHJlc3MiOiJIYSBOb2kiLCJpYXQiOjE2NTA3ODQzNTl9.yY2Eat636QE7ZJ37Qisu8jekLtDOn6P9OMCOx4Cf9ik")
-console.log(decodedData);
 //init web routes
 initWebRoutes(app)
 initApiRoutes(app)
