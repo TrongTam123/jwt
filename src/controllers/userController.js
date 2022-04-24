@@ -35,7 +35,12 @@ const readed = async (req, res) => {
 
 const created = async (req, res) => {
     try {
-        
+        let data = await userApiService.CreateUser(req.body)
+        return res.status(200).json({
+                EM: data.EM, //error message
+                EC: data.EC, // ERROR CODE
+                DT: data.DT // Data
+            })
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -49,7 +54,12 @@ const created = async (req, res) => {
 
 const updated = async (req, res) => {
     try {
-        
+        let data = await userApiService.UpdateUser(req.body)
+        return res.status(200).json({
+                EM: data.EM, //error message
+                EC: data.EC, // ERROR CODE
+                DT: data.DT // Data
+            })
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -63,7 +73,12 @@ const updated = async (req, res) => {
 
 const deleted = async (req, res) => {
     try {
-        
+        let data = await userApiService.deleteUser(req.body.id)
+        return res.status(200).json({
+                EM: data.EM, //error message
+                EC: data.EC, // ERROR CODE
+                DT: data.DT // Data
+            })
     } catch (e) {
         console.log(e);
         return res.status(500).json({

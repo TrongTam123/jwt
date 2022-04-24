@@ -6,19 +6,10 @@ require('dotenv').config()
 import bodyParser from 'body-parser'
 import connection from './config/connectDB'
 import configCors from "./config/cors"
+import { CreateJWT, verifyToken } from './middleware/JWTAction'
 
 const app = express()
 const PORT = process.env.PORT || 6060;
-
-//Static files
-app.use(express.static('public'))
-app.use('css', express.static(__dirname + 'public/css'))
-app.use('js', express.static(__dirname + 'public/js'))
-app.use('img', express.static(__dirname + 'public/img'))
-app.use('svg', express.static(__dirname + 'public/svg'))
-app.use('eot', express.static(__dirname + 'public/eot'))
-app.use('scss', express.static(__dirname + 'public/scss'))
-app.use('less', express.static(__dirname + 'public/less'))
 
 //Config Cors
 configCors(app)
@@ -32,6 +23,10 @@ configViewEngine(app)
 // connection
 connection()
 
+// test jwt
+CreateJWT()
+let decodedData = verifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGFtbSIsImFkZHJlc3MiOiJIYSBOb2kiLCJpYXQiOjE2NTA3ODQzNTl9.yY2Eat636QE7ZJ37Qisu8jekLtDOn6P9OMCOx4Cf9ik")
+console.log(decodedData);
 //init web routes
 initWebRoutes(app)
 initApiRoutes(app)
