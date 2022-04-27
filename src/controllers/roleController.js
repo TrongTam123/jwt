@@ -1,3 +1,4 @@
+import roleApiService from '../service/roleApiService'
 import userApiService from '../service/userApiService'
 
 const readed = async (req, res) => {
@@ -35,7 +36,7 @@ const readed = async (req, res) => {
 
 const created = async (req, res) => {
     try {
-        let data = await userApiService.CreateUser(req.body)
+        let data = await roleApiService.CreateNewGroup(req.body)
         return res.status(200).json({
                 EM: data.EM, //error message
                 EC: data.EC, // ERROR CODE
@@ -47,7 +48,6 @@ const created = async (req, res) => {
             EM: 'error from sever', //error message
             EC: '-1', // ERROR CODE
             DT: '', // Data
-            ET: ''
         })
     }
 }
@@ -90,19 +90,7 @@ const deleted = async (req, res) => {
     }
 }
 
-const getUserAccount = async (req, res) => {
-    return res.status(200).json({
-        EM: 'ok', //error message
-        EC: 0, // ERROR CODE
-        DT: {
-            access_token: req.token,
-            groupWithRoles: req.user.groupWithRoles,
-            email: req.user.email,
-            username: req.user.username
-        } // Data
-    })
-}
 
 module.exports = {
-    readed, created, updated, deleted, getUserAccount
+    readed, created, updated, deleted
 }

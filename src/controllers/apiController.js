@@ -46,6 +46,13 @@ const handleRegister = async(req, res) => {
 const handleLogin = async (req, res)  => {
     try {
         let data = await loginRegisterService.handleLogin(req.body)
+        //set cookie
+        if(data && data.DT.access_token){
+            res.cookie("jwt", data.DT.access_token, {
+                httpOnly: true, 
+                maxAge: 60 * 60 * 1000
+            })
+        }
         return res.status(200).json({
             EM: data.EM, //error message
             EC: data.EC, // ERROR CODE
@@ -63,6 +70,25 @@ const handleLogin = async (req, res)  => {
     }
 }
 
+const handleLogOut = async (req, res) => {
+    try {
+        res.clearCookie("jwt");
+        return res.status(200).json({
+            EM:'Clear cookie done', //error message
+            EC: 0,
+            DT: '', // Data
+        }) 
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            EM: 'error from sever', //error message
+            EC: '-1', // ERROR CODE
+            DT: '', // Data
+            ET: ''
+        })
+    }
+}
+
 module.exports = {
-    testApi, handleRegister, handleLogin
+    testApi, handleRegister, handleLogin, handleLogOut
 }
