@@ -170,7 +170,7 @@ const deleteUser = async (id) => {
                 DT: []
             }
         } else {
-             return {
+            return {
                 EM: 'User not exist',
                 EC: 2,
                 DT: []
