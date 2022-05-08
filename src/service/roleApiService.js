@@ -63,6 +63,40 @@ const getRoleWithPagination = async (page, limit) => {
     }
 }
 
+const UpdateRole = async (data) => {
+    try {
+        let role = await db.Role.findOne({
+            where: {
+                id: data.id
+            }
+        })
+        if (role) {
+         await role.update({
+                url: data.url,
+                description: data.description,
+            })
+            return {
+                EM: 'Update User Success',
+                EC: 0,
+                DT: ''
+            }
+        } else {
+            return {
+                EM: 'Role not found',
+                EC: 1,
+                DT: ''
+            }
+        }
+    } catch (e) {
+        console.log(e);
+        return {
+                EM: 'Somethign wrongs with services',
+                EC: 1,
+                DT: []
+            }
+    }
+}
+
 const getAllRoles = async () => {
     try {
         let data = await db.Role.findAll({})
@@ -174,5 +208,5 @@ const assignRoleToGroup = async (data) => {
 }
 
 module.exports = {
-    CreateNewGroup, getRoleWithPagination, getAllRoles, deleteRole, getRoleByGroup, assignRoleToGroup
+    CreateNewGroup, getRoleWithPagination, getAllRoles, deleteRole, getRoleByGroup, assignRoleToGroup, UpdateRole
 }

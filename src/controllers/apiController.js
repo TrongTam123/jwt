@@ -47,6 +47,7 @@ const handleLogin = async (req, res)  => {
     try {
         let data = await loginRegisterService.handleLogin(req.body)
         //set cookie
+        console.log(data);
         if(data && data.DT.access_token){
             res.cookie("jwt", data.DT.access_token, {
                 httpOnly: true, 

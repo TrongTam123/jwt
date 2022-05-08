@@ -1,4 +1,5 @@
-import roleApiService from '../service/roleApiService'
+import userApiService from '../service/userApiService'
+import postApiService from '../service/postApiService'
 
 const readed = async (req, res) => {
     try {
@@ -6,7 +7,7 @@ const readed = async (req, res) => {
             let page = req.query.page
             let limit = req.query.limit
 
-            let data = await roleApiService.getRoleWithPagination(+page, +limit)
+            let data = await postApiService.getPostWithPagination(+page, +limit)
 
             return res.status(200).json({
                 EM: data.EM, //error message
@@ -14,7 +15,7 @@ const readed = async (req, res) => {
                 DT: data.DT // Data
             })
         } else {
-            let data = await roleApiService.getAllRoles()
+            let data = await postApiService.getAllPost()
 
             return res.status(200).json({
                 EM: data.EM, //error message
@@ -35,7 +36,7 @@ const readed = async (req, res) => {
 
 const created = async (req, res) => {
     try {
-        let data = await roleApiService.CreateNewGroup(req.body)
+        let data = await postApiService.CreatePost(req.body)
         return res.status(200).json({
                 EM: data.EM, //error message
                 EC: data.EC, // ERROR CODE
@@ -47,13 +48,14 @@ const created = async (req, res) => {
             EM: 'error from sever', //error message
             EC: '-1', // ERROR CODE
             DT: '', // Data
+            ET: ''
         })
     }
 }
 
 const updated = async (req, res) => {
     try {
-        let data = await roleApiService.UpdateRole(req.body)
+        let data = await postApiService.UpdatePost(req.body)
         return res.status(200).json({
                 EM: data.EM, //error message
                 EC: data.EC, // ERROR CODE
@@ -72,7 +74,7 @@ const updated = async (req, res) => {
 
 const deleted = async (req, res) => {
     try {
-        let data = await roleApiService.deleteRole(req.body.id)
+        let data = await postApiService.deletePost(req.body.id)
         return res.status(200).json({
                 EM: data.EM, //error message
                 EC: data.EC, // ERROR CODE
@@ -83,49 +85,12 @@ const deleted = async (req, res) => {
         return res.status(500).json({
             EM: 'error from sever', //error message
             EC: '-1', // ERROR CODE
-            DT: '', // Dat
+            DT: '', // Data
             ET: ''
         })
     }
 }
 
-const getRoleByGroup = async (req, res) => {
-    try {
-        let id = req.params.groupId
-        let data = await roleApiService.getRoleByGroup(id)
-        return res.status(200).json({
-                EM: data.EM, //error message
-                EC: data.EC, // ERROR CODE
-                DT: data.DT // Data
-            })
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            EM: 'error from sever', //error message
-            EC: '-1', // ERROR CODE
-            DT: '', // Dat
-        })
-    }
-}
-
-const assignToGroup = async (req, res) => {
-    try {
-        let data = await roleApiService.assignRoleToGroup(req.body.data)
-        return res.status(200).json({
-                EM: data.EM, //error message
-                EC: data.EC, // ERROR CODE
-                DT: data.DT // Data
-            })
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({
-            EM: 'error from sever', //error message
-            EC: '-1', // ERROR CODE
-            DT: '', // Dat
-        })
-    }
-}
-
 module.exports = {
-    readed, created, updated, deleted, getRoleByGroup, assignToGroup
+    readed, created, updated, deleted
 }

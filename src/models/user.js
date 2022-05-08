@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.belongsTo(models.Group, {foreignKey: 'groupId'})
+      User.belongsTo(models.Post, {foreignKey: 'postId'})
       User.belongsToMany(models.Project, {
         through: 'Project_User'
       })
@@ -26,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING,
     sex: DataTypes.STRING,
     phone: DataTypes.STRING,
-    groupId: DataTypes.INTEGER
+    groupId: DataTypes.INTEGER,
+    postId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User',

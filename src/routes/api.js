@@ -4,6 +4,8 @@ import userController from '../controllers/userController';
 import groupController from '../controllers/groupController';
 import { checkUserJWT, checkUserPerMission } from '../middleware/JWTAction'
 import roleController from '../controllers/roleController'
+import categoryController from '../controllers/categoryController'
+import postController from '../controllers/postController'
 
 const router = express.Router()
 
@@ -29,13 +31,25 @@ const initApiRoutes = (app) => {
     router.put("/user/update", userController.updated)
     router.delete("/user/delete", userController.deleted)
 
-    //routes routes
+    //role routes
     router.get("/role/read", roleController.readed)
     router.post("/role/create", roleController.created)
     router.put("/role/update", roleController.updated)
     router.delete("/role/delete", roleController.deleted)
     router.get("/role/by-group/:groupId", roleController.getRoleByGroup)
     router.post("/role/assign-to-group", roleController.assignToGroup)
+
+    //category routes
+    router.get("/category/read", categoryController.readed)
+    router.post("/category/create", categoryController.created)
+    router.put("/category/update", categoryController.updated)
+    router.delete("/category/delete", categoryController.deleted)
+
+    //post routes
+    router.get("/post/read", postController.readed)
+    router.post("/post/create", postController.created)
+    router.put("/post/update", postController.updated)
+    router.delete("/post/delete", postController.deleted)
     
     //group routes
     router.get("/group/read", groupController.readFunc)
