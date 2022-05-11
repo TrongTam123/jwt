@@ -15,6 +15,19 @@ const getGroupWithRoles = async (user) => {
     return roles ? roles : {}
 }
 
+const getPostWithCategory = async (data) => {
+    let post = await db.Post.findAll({
+        where: {
+            id: data.categoryId
+        },
+        include: { 
+            model: db.Category, 
+            through: { attributes: [] }
+        }
+    })
+    return post ? post : {}
+}
+
 module.exports = {
-    getGroupWithRoles
+    getGroupWithRoles, getPostWithCategory
 }

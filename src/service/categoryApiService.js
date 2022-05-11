@@ -1,14 +1,21 @@
 import db from '../models/index'
-import { checkEmail, checkPhone, hashUserPassWord } from './loginRegisterService'
 
 const getAllCategory = async () => {
     try {
         let data = await db.Category.findAll({})
-        return {
-                EM: `Get all category sucess`,
+        if(data) {
+            return {
+                EM: 'Get Data Success',
                 EC: 0,
                 DT: data
             }
+        } else {
+            return {
+                EM: 'Get Data Falied',
+                EC: -1,
+                DT: []
+            }
+        }
     } catch(e) {
         console.log(e);
         return {

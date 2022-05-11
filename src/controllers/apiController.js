@@ -23,7 +23,7 @@ const handleRegister = async(req, res) => {
                 DT: '' // Data
             })
         }
-
+        
         // Service: create user
         let data = await loginRegisterService.registerNewUser(req.body)
 

@@ -44,14 +44,17 @@ const initApiRoutes = (app) => {
     router.post("/category/create", categoryController.created)
     router.put("/category/update", categoryController.updated)
     router.delete("/category/delete", categoryController.deleted)
+    router.get("/category/get-category", categoryController.getAllCategory)
 
     //post routes
     router.get("/post/read", postController.readed)
     router.post("/post/create", postController.created)
     router.put("/post/update", postController.updated)
     router.delete("/post/delete", postController.deleted)
-    
-    //group routes
+    router.get("/post/get-detail-post", postController.getPostById)
+    router.get("/post/get-current-post", postController.getPostCurrent)
+    router.get("/post/get-all-current-post", postController.getAllPostCurrent)
+    //group route
     router.get("/group/read", groupController.readFunc)
 
     return app.use("/api/v1/", router)
