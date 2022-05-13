@@ -6,6 +6,7 @@ import { checkUserJWT, checkUserPerMission } from '../middleware/JWTAction'
 import roleController from '../controllers/roleController'
 import categoryController from '../controllers/categoryController'
 import postController from '../controllers/postController'
+import feedbackController from '../controllers/feedbackController'
 
 const router = express.Router()
 
@@ -47,7 +48,6 @@ const initApiRoutes = (app) => {
     router.get("/category/get-category", categoryController.getAllCategory)
     router.get("/category/get-category-by-id", categoryController.getCategoryById)
 
-
     //post routes
     router.get("/post/read", postController.readed)
     router.post("/post/create", postController.created)
@@ -56,6 +56,11 @@ const initApiRoutes = (app) => {
     router.get("/post/get-detail-post", postController.getPostById)
     router.get("/post/get-current-post", postController.getPostCurrent)
     router.get("/post/get-all-current-post", postController.getAllPostCurrent)
+
+    //feedback
+    router.get("/feedback/read", feedbackController.readed)
+    router.post("/feedback/create", feedbackController.created)
+    router.delete("/feedback/delete", feedbackController.deleted)
     //group route
     router.get("/group/read", groupController.readFunc)
 
