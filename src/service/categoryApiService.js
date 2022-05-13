@@ -26,6 +26,50 @@ const getAllCategory = async () => {
     }
 }
 
+const getCategoryWithPost = async (id) => {
+    try {
+        if(!id) {
+            return {
+                EM: "Don't have category",
+                EC: -1,
+                DT: []
+            }
+        } 
+        let post = await db.Category.findAll({
+            where : {
+                id: id
+            },
+            include: 
+                {
+                    model: db.Post,
+                },
+            raw: true,
+            nest: true
+        })
+         
+        if(post) {
+            return {
+                EM: 'Get Data Success',
+                EC: 0,
+                DT: post
+            }
+        } else {
+            return {
+                EM: 'Get Data Falied',
+                EC: -1,
+                DT: []
+            }
+        }
+    } catch (e) {
+        console.log(e);
+        return {
+                EM: 'Somethign wrongs with services',
+                EC: 1,
+                DT: []
+            }
+    }
+}
+
 const getCategoyryWithPagination = async (page, limit) => {
     try {
         let offset = (page - 1) * limit
@@ -143,5 +187,5 @@ const deleteCategory = async (id) => {
 }
 
 module.exports = {
-    getAllCategory, CreateCategory, UpdateCategory, deleteCategory, getCategoyryWithPagination
+    getAllCategory, CreateCategory, UpdateCategory, deleteCategory, getCategoyryWithPagination, getCategoryWithPost
 }

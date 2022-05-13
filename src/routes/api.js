@@ -45,6 +45,8 @@ const initApiRoutes = (app) => {
     router.put("/category/update", categoryController.updated)
     router.delete("/category/delete", categoryController.deleted)
     router.get("/category/get-category", categoryController.getAllCategory)
+    router.get("/category/get-category-by-id", categoryController.getCategoryById)
+
 
     //post routes
     router.get("/post/read", postController.readed)

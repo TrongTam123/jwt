@@ -21,7 +21,7 @@ const getPost = async (id) => {
             raw: true,
             nest: true
         })
-        
+         
         if(post) {
             return {
                 EM: 'Get Data Success',
