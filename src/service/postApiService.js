@@ -77,6 +77,39 @@ const getPostRecent = async () => {
     }
 }
 
+
+const getPostSection = async () => {
+    try {
+        let post = await db.Post.findAll({
+            order: [['id', 'ASC']],
+            limit: 6,
+            raw: true,
+            nest: true
+        })
+        if(post) {
+            // let data = users.get({ plain: true })
+            return {
+                EM: 'Get Data Success',
+                EC: 0,
+                DT: post
+            }
+        } else {
+            return {
+                EM: 'Get Data Falied',
+                EC: -1,
+                DT: []
+            }
+        }
+    } catch (e) {
+        console.log(e);
+        return {
+                EM: 'Somethign wrongs with services',
+                EC: 1,
+                DT: []
+            }
+    }
+}
+
 const getAllCurrentPost = async (page, limit) => {
     try {
         let offset = (page - 1) * limit
@@ -281,5 +314,5 @@ const deletePost = async (id) => {
 }
 
 module.exports = {
-    getAllPost, CreatePost, UpdatePost, deletePost, getPostWithPagination, getPost, getPostRecent, getAllCurrentPost
+    getAllPost, CreatePost, UpdatePost, deletePost, getPostWithPagination, getPost, getPostRecent, getAllCurrentPost, getPostSection
 }

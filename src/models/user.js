@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.belongsTo(models.Group, {foreignKey: 'groupId'})
       User.belongsTo(models.Post, {foreignKey: 'postId'})
+      User.hasMany(models.Comment, {foreignKey: 'userId'})
       User.belongsToMany(models.Project, {
         through: 'Project_User'
       })

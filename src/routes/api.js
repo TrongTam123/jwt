@@ -56,6 +56,7 @@ const initApiRoutes = (app) => {
     router.get("/post/get-detail-post", postController.getPostById)
     router.get("/post/get-current-post", postController.getPostCurrent)
     router.get("/post/get-all-current-post", postController.getAllPostCurrent)
+    router.get("/post/get-post-section", postController.getPostSectionBanner)
 
     //feedback
     router.get("/feedback/read", feedbackController.readed)

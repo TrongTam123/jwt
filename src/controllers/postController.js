@@ -161,6 +161,25 @@ const getAllPostCurrent = async (req, res) => {
     }
 }
 
+const getPostSectionBanner = async (req, res) => {
+    try {
+        let data = await postApiService.getPostSection()
+        return res.status(200).json({
+                EM: data.EM, //error message
+                EC: data.EC, // ERROR CODE
+                DT: data.DT // Data
+            })
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            EM: 'error from sever', //error message
+            EC: '-1', // ERROR CODE
+            DT: '', // Data
+            ET: ''
+        })
+    }
+}
+
 module.exports = {
-    readed, created, updated, deleted, getPostById, getPostCurrent, getAllPostCurrent
+    readed, created, updated, deleted, getPostById, getPostCurrent, getAllPostCurrent, getPostSectionBanner
 }
