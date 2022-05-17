@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   //object relational mapping
   Comment.init({
     body: DataTypes.STRING,
+    parentId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     postId: DataTypes.INTEGER
   }, {

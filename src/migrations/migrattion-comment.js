@@ -11,6 +11,9 @@ module.exports = {
       body: {
         type: Sequelize.STRING
       },
+      parentId: {
+        type: Sequelize.INTEGER
+      },
       userId: {
         type: Sequelize.INTEGER
       },
