@@ -43,7 +43,6 @@ const getUserList = async () => {
         raw: true,
         nest: true
     })
-    console.log("Check user", newUser);
 
     // let rows = await db.Group.findOne({
     //     where: {
@@ -66,7 +65,6 @@ const getUserList = async () => {
         nest: true
     })
 
-    console.log("Check rows", r);
 
     let users = []
 
